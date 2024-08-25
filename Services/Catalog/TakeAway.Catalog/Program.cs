@@ -14,6 +14,8 @@ builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IDailyDiscountService, DailyDiscountService>();
 
+
+//ders 61, 1:05
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
 	opt.Authority = builder.Configuration["IdentityServerUrl"];

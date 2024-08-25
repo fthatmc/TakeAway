@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-//postgreSQL için baðlantý konfigürasyonu
+//postgreSQL için baðlantý konfigürasyonu(metodu)
 
 var connectionstring = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CommentContext>(opt =>
@@ -16,8 +16,8 @@ builder.Services.AddDbContext<CommentContext>(opt =>
     opt.UseNpgsql(connectionstring);
 });
 
-builder.Services.AddScoped<IUserCommentService, UserCommentService>();
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<IUserCommentService, UserCommentService>(); //
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly()); //AutoMapper konfigürasyonu
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
