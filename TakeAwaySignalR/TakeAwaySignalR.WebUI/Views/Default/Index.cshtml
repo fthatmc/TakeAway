@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = null;
+}
+
+@section Scripts {
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+    <div class="container">
+        <br />
+        <br />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <script type="text/javascript">
+                        $(document).ready(() => {
+                            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7010/signalrhub").build();
+                            $("#constatus").text(connection.state);
+                            connection.start().then(() => {
+                                $("#constatus").text(connection.state);
+                                setInterval(() => {
+                                    connection.invoke("SendStatistics");
+                                }, 1000);
+
+                            }).catch((err) => { console.log(err) });
+                            connection.on("ReceiveStatusYoldaCount", (value1) => {
+                                $("#textyoldacount").text(value1);
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="col-md-8 offset-2">
+    <div class="alert alert-primary"> Bağlantının Durumu: <strong id="constatus"></strong></div>
+    <div class="alert alert-primary"> Yoldaki Ürün Sayısı: <strong id="textyoldacount"></strong></div>
+</div>
